@@ -3,8 +3,6 @@ import re
 
 
 class Video(models.Model):
-    class Meta:
-        db_table = 'video'
 
     title = models.CharField(verbose_name='タイトル', max_length=255)
     url = models.URLField(verbose_name='URL')
