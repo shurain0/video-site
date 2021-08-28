@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from django.views.generic import ListView
+from .models import Video
 
-# Create your views here.
+
+class VideoListView(ListView):
+    model = Video
+
+
+video_list = VideoListView.as_view()

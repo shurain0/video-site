@@ -1,0 +1,30 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>{% block page_title %}{% endblock %}</title>
+
+    {# --- css --- #}
+    <link rel="stylesheet" href="{% static 'vendor/semantic/semantic.min.css' %}">
+    <style type="text/css">
+        .main.container{
+            margin-top: 5em; 
+        }
+    </style>
+</head>
+
+<body>
+    {% include "header_menu.html" %}
+
+    <div class="ui main container">
+        {% block content %}{% endblock %}
+    </div>
+
+    {# --- js --- #}
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'vendor/semantic/semantic.min.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html> 

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}ビデオラボ{% endblock  %}
+
+{% block extra_css %}{% endblock extra_css %}
+
+{% block content %}
+
+<div class="ui four doubling stackable link cards">
+    {% for object in object_list %}
+    <div class="card">
+        <div class="image">
+            <img src="{{object.thumbnail_url}}">
+        </div>
+        <div class="content">
+            <div class="header">{{object.title|truncatechars:32}}</div>
+            <div class="meta">
+                <a></a>
+            </div>
+            <div class="description">
+                {{object.description|truncatechars:32}}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock content %} 
