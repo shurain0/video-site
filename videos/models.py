@@ -12,15 +12,15 @@ class Video(models.Model):
 
     @property
     def video_id(self):
-        yt_url = "https://youtu.be/(.*)"
-        return re.findall(yt_url, str(self.url))[0]
+        YT_URL = "https://youtu.be/(.*){11}"
+        return re.match(YT_URL, str(self.url)).group()[-11:]
 
     @property
     def thumbnail_url(self):
-        img_url = "https://img.youtube.com/vi/"
+        THUMBNAIL_URL = "https://img.youtube.com/vi/{}/mqdefault.jpg"
 
         if self.video_id:
-            return f"{img_url}{self.video_id}/mqdefault.jpg"
+            return THUMBNAIL_URL.format(self.video_id)
         return ""
 
     def __str__(self):

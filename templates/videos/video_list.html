@@ -3,18 +3,11 @@
 
 {% block title %}ビデオラボ{% endblock title %}
 
-{% block extra_css %}
-<style type="text/css">
-        .text-column {
-            text-decoration: none;
-            color : #FFFFFF;
-        }
-</style>
-{% endblock extra_css %}
+{% block extra_css %}{% endblock extra_css %}
 
 {% block content %}
 
-<div class="ui four doubling link cards">
+<div class="ui four doubling stackable link cards">
     {% for object in object_list %}
     <div class="card">
         <div class="image">
