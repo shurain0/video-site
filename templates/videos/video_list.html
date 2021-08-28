@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}ビデオラボ{% endblock title %}
+
+{% block extra_css %}
+<style type="text/css">
+        .text-column {
+            text-decoration: none;
+            color : #FFFFFF;
+        }
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+
+<div class="ui four doubling link cards">
+    {% for object in object_list %}
+    <div class="card">
+        <div class="image">
+            <img src="{{object.thumbnail_url}}">
+        </div>
+        <div class="content">
+            <div class="header">{{object.title|truncatechars_html:32}}</div>
+            <div class="meta">
+                <a></a>
+            </div>
+            <div class="description">
+                {{object.description|truncatechars_html:32}}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock content %} 
