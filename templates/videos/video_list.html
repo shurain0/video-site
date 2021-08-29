@@ -7,22 +7,19 @@
 
 {% block content %}
 
-<div class="ui four doubling stackable link cards">
+<div class="ui four doubling stackable cards">
     {% for object in object_list %}
-    <div class="card">
-        <div class="image">
-            <img src="{{object.thumbnail_url}}">
-        </div>
-        <div class="content">
-            <div class="header">{{object.title|truncatechars:32}}</div>
-            <div class="meta">
-                <a></a>
+        <a class="link card" href="{% url 'detail' object.id %}">
+            <div class="image">
+                <img src="{{object.thumbnail_url}}">
             </div>
-            <div class="description">
-                {{object.description|truncatechars:32}}
+            <div class="content">
+                <div class="header">{{object.title|truncatechars:32}}</div>
+                <div class="description">
+                    {{object.description|truncatechars:32}}
+                </div>
             </div>
-        </div>
-    </div>
+        </a>
     {% endfor %}
 </div>
 
