@@ -9,20 +9,20 @@
 
 <div class="ui four doubling stackable link cards">
     {% for object in object_list %}
-    <div class="card">
-        <div class="image">
-            <img src="{{object.thumbnail_url}}">
-        </div>
-        <div class="content">
-            <div class="header">{{object.title|truncatechars:32}}</div>
-            <div class="meta">
-                <a></a>
+        <div class="card">
+            <a class="image" href="{% url 'detail' object.id %}">
+                <img src="{{object.thumbnail_url}}">
+            </a>
+            <div class="content">
+                <div class="header">{{object.title|truncatechars:32}}</div>
+                <div class="meta">
+                    <a></a>
+                </div>
+                <div class="description">
+                    {{object.description|truncatechars:32}}
+                </div>
             </div>
-            <div class="description">
-                {{object.description|truncatechars:32}}
-            </div>
         </div>
-    </div>
     {% endfor %}
 </div>
 

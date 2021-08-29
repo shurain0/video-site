@@ -12,4 +12,4 @@ class VideoDetailView(DetailView):
     model = Video
 
 
-Video_detail = VideoDetailView.as_view()
+video_detail = VideoDetailView.as_view()
