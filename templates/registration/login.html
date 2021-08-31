@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}ログイン{% endblock title %}
+
+{% block content %}
+<div class="ui grid">
+    <div class="ui eight wide centered column">
+        <form class="ui form" method ="post">
+            {% csrf_token %}
+            <div class="field">
+                {{form.as_p}}
+            </div>
+            <button class="ui button" type="submit">ログイン</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
