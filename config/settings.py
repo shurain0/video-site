@@ -103,13 +103,10 @@ AUTH_PASSWORD_VALIDATORS = [
         }
     },
     {
-        'NAME': 'videolabo-site.validators.MaximumLengthValidator',
-        'OPTIONS': {
-            'max_length': 8,
-        }
+        'NAME': 'validators.MaximumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'validators.AlphanumericValidator',
     },
 ]
 
