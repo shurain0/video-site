@@ -1,4 +1,5 @@
 from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Video
 
 
@@ -8,7 +9,7 @@ class VideoListView(ListView):
 
 video_list = VideoListView.as_view()
 
-class VideoDetailView(DetailView):
+class VideoDetailView(LoginRequiredMixin, DetailView):
     model = Video
 
 

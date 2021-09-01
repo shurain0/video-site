@@ -1,8 +1,15 @@
 <div class="ui inverted stackable fixed menu">
     <div class="ui container">
-        <a href="#" class="header item">
+        <a href="{% url 'list' %}" class="header item">
             <i class="play large green icon"></i>
             ビデオラボ
         </a>
+        <div class="right menu">
+        {% if user.is_authenticated %}
+             <a href="{% url 'logout' %}" class="item">ログアウト</a>
+        {% else %}
+             <a href="{% url 'login' %}" class="item">ログイン</a>
+        {% endif %}
+        </div>
     </div>
 </div>
