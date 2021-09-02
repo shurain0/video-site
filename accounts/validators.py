@@ -3,6 +3,7 @@ from django.utils.translation import gettext as _
 import re
 
 
+# 最大文字を超えるものをはじく（デフォルトは最大8文字）
 class MaximumLengthValidator:
     def __init__(self, max_length=8):
         self.max_length = max_length
@@ -22,6 +23,7 @@ class MaximumLengthValidator:
         )
 
 
+# 半角英数字以外を含むものをはじく
 class AlphanumericValidator:
     def validate(self, password, user=None):
         if not re.match('^[a-z0-9]+$', password):
@@ -34,6 +36,7 @@ class AlphanumericValidator:
         return _("半角英数字で入力してください。")
 
 
+# a-zを含まないものをはじく
 class LowercaseValidator:
     def validate(self, password, user=None):
         if not re.findall('[a-z]', password):
@@ -46,6 +49,7 @@ class LowercaseValidator:
         return _("小文字のa-zを含めてください。")
 
 
+# 数字を含まないものをはじく
 class NumberValidator:
     def validate(self, password, user=None):
         if not re.findall('\d', password):
