@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Video
+from .models import Video, Course
 
 
 class VideoListView(ListView):
@@ -14,3 +14,15 @@ class VideoDetailView(LoginRequiredMixin, DetailView):
 
 
 video_detail = VideoDetailView.as_view()
+
+
+class CourseListView(ListView):
+    model = Course
+
+    def get_queryset(self):
+        # Viewで表示するクエリセットを取得
+        queryset = self.model.objects.prefetch_related('video')
+        return queryset
+
+
+course_list = CourseListView.as_view()
