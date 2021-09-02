@@ -39,7 +39,7 @@ class AlphanumericValidator:
 # a-zを含まないものをはじく
 class LowercaseValidator:
     def validate(self, password, user=None):
-        if not re.findall('[a-z]', password):
+        if not re.match('[a-z]', password):
             raise ValidationError(
                 _("このパスワードには1文字も小文字のa-zが含まれていません。"),
                 code='password_no_lower'
@@ -52,7 +52,7 @@ class LowercaseValidator:
 # 数字を含まないものをはじく
 class NumberValidator:
     def validate(self, password, user=None):
-        if not re.findall('\d', password):
+        if not re.match('\d', password):
             raise ValidationError(
                 _("このパスワードには1文字も数字が含まれていません。"),
                 code='password_no_number',
