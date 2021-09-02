@@ -1,13 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 import re
-# from string import ascii_lowercase, digits
-
-# def contain_any(target, condition_list):
-#     return any([i in target for i in condition_list])
-
-# def contain_all(target, condition_list):
-#     return all([i in target for i in condition_list])
 
 
 class MaximumLengthValidator:
@@ -28,22 +21,38 @@ class MaximumLengthValidator:
             % {'max_length': self.max_length}
         )
 
+
 class AlphanumericValidator:
     def validate(self, password, user=None):
-        if re.match('^[a-zA-Z]+$', password):
+        if not re.match('^[a-z0-9]+$', password):
             raise ValidationError(
-            _("半角の英字と数字を両方使用してください。"),
-            code='password_only_alphabet'
+                _("このパスワードには半角英数字以外が含まれています。"),
+                code='password_no_alphanumeric'
             )
-        elif re.match('[0-9]+$', password):
-            raise ValidationError(
-            _("半角の英字と数字を両方使用してください。"),
-            code='password_only_number'
-            )
-        elif not re.match('^[a-zA-Z0-9]+$', password):
-            raise ValidationError(
-            _("半角英数字で入力してください。"),
-            code='password_not_alphanumeric',
-            )
+
     def get_help_text(self):
         return _("半角英数字で入力してください。")
+
+
+class LowercaseValidator:
+    def validate(self, password, user=None):
+        if not re.findall('[a-z]', password):
+            raise ValidationError(
+                _("このパスワードには1文字も小文字のa-zが含まれていません。"),
+                code='password_no_lower'
+            )
+
+    def get_help_text(self):
+        return _("小文字のa-zを含めてください。")
+
+
+class NumberValidator:
+    def validate(self, password, user=None):
+        if not re.findall('\d', password):
+            raise ValidationError(
+                _("このパスワードには1文字も数字が含まれていません。"),
+                code='password_no_number',
+            )
+
+    def get_help_text(self):
+        return _("数字を含めてください。")

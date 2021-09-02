@@ -103,10 +103,16 @@ AUTH_PASSWORD_VALIDATORS = [
         }
     },
     {
-        'NAME': 'validators.MaximumLengthValidator',
+        'NAME': 'accounts.validators.MaximumLengthValidator',
     },
     {
-        'NAME': 'validators.AlphanumericValidator',
+        'NAME': 'accounts.validators.AlphanumericValidator',
+    },
+    {
+        'NAME': 'accounts.validators.LowercaseValidator'
+    },
+    {
+        'NAME': 'accounts.validators.NumberValidator'
     },
 ]
 
