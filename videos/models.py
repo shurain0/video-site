@@ -8,7 +8,11 @@ class Course(models.Model):
     description = models.TextField(
         verbose_name="概要", null=True, blank=True)
     thumbnail = models.ImageField(
-        verbose_name="サムネイル", null=True, blank=True, upload_to="images/")
+        verbose_name="サムネイル", null=True, blank=True, default="images/default_course.jpg", upload_to="images/")
+
+    @property
+    def first_video(self):
+                return self.videos.first()
 
     def __str__(self):
         return self.title
@@ -20,7 +24,7 @@ class Video(models.Model):
     url = models.URLField(verbose_name='URL')
     description = models.TextField(verbose_name='概要', null=True, blank=True)
     course = models.ForeignKey(
-        Course, verbose_name="コース", on_delete=models.SET_NULL, null=True, blank=True, related_name="video")
+        Course, verbose_name="コース", on_delete=models.PROTECT,default="未分類" ,related_name="videos")
 
     @property
     def video_id(self):
