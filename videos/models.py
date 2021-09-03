@@ -12,7 +12,7 @@ class Course(models.Model):
 
     @property
     def first_video(self):
-                return self.videos.first()
+        return self.videos.first()
 
     def __str__(self):
         return self.title
