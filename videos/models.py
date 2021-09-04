@@ -43,5 +43,6 @@ class Video(models.Model):
     def same_course_videos(self):
         return self.course.videos.all()
 
+
     def __str__(self):
         return self.title

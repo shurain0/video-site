@@ -4,45 +4,39 @@
 {% block page_title %}{{object.title}}{% endblock  %}
 
 {% block content %}
-<div class="ui two columns stackable grid">
-  <div class="ui eleven wide text column">
-    <div class="ui text container">
+<div class="ui stackable grid">
+  <div class="eleven wide computer sixteen wide tablet column">
+    <div class="ui container">
             <div class="ui embed" data-source="youtube" data-id="{{object.video_id}}"></div>
             <div class="ui header">{{object.title}}</div>
             <div class="ui divider"></div>
             <div>{{object.description|linebreaksbr |urlize}}</div>
     </div>
   </div>
-  <div class="ui five wide column container">
+  <div class="five wide computer sixteen wide tablet column">
     <h2 class="header">{{object.course.title}}</h2>
-    <div class="ui relaxed devided items">
-    {% for course_video in object.same_course_videos %}
+    <div class="ui devided items">
+    {% for course_video in object.course.videos.all %}
       {% if course_video.id is object.id %}
-        <a class="ui inverted grey segment item row" href="{% url 'detail' course_video.id %}">
-            <div class="ui small image">
-              <img src="{{course_video.thumbnail_url}}">
-            </div>
-            <div class="content">
-              {{course_video.title| truncatechars:32}}
-            </div>
-        </a>
+        <div class="ui inverted grey segment item row" href="{% url 'detail' course_video.id %}">
       {% else %}
         <a class="ui item row" href="{% url 'detail' course_video.id %}">
-            <div class="ui small image">
+      {% endif %}
+            <div class="ui small image column">
               <img src="{{course_video.thumbnail_url}}">
             </div>
-            <div class="content">
+            <div class="ui content column">
               {{course_video.title| truncatechars:32}}
             </div>
+      {% if course_video.id is object.id %}
+        </div>
+      {% else %}
         </a>
       {% endif %}
     {% endfor %}
+    </div>
   </div>
 </div>
-</div>
-
-
-
 {% endblock %}
 
 {% block extra_js %}
