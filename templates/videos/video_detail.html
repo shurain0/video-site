@@ -5,7 +5,7 @@
 
 {% block content %}
 <div class="ui stackable grid">
-  <div class="eleven wide computer sixteen wide tablet column">
+  <div class="eleven wide computer sixteen wide tablet column"> {# 動画側のカラム #}
     <div class="ui container">
             <div class="ui embed" data-source="youtube" data-id="{{object.video_id}}"></div>
             <div class="ui header">{{object.title}}</div>
@@ -13,26 +13,26 @@
             <div>{{object.description|linebreaksbr |urlize}}</div>
     </div>
   </div>
-  <div class="five wide computer sixteen wide tablet column">
+  <div class="five wide computer sixteen wide tablet column"> {# 再生リスト側のカラム #}
     <h2 class="header">{{object.course.title}}</h2>
     <div class="ui devided items">
     {% for course_video in object.course.videos.all %}
-      {% if course_video.id is object.id %}
+      {% if course_video.id is object.id %} {# 再生リストの動画が再生中の動画と一致する場合 #}
         <div class="ui inverted grey segment item row" href="{% url 'detail' course_video.id %}">
-      {% else %}
+      {% else %} {#一致しない場合#}
         <a class="ui item row" href="{% url 'detail' course_video.id %}">
-      {% endif %}
+      {% endif %} {# if文ここまで #}
             <div class="ui small image column">
               <img src="{{course_video.thumbnail_url}}">
             </div>
             <div class="ui content column">
               {{course_video.title| truncatechars:32}}
             </div>
-      {% if course_video.id is object.id %}
+      {% if course_video.id is object.id %} {# 再生リストの動画が再生中の動画と一致する場合 #}
         </div>
-      {% else %}
+      {% else %} {# 一致しない場合 #}
         </a>
-      {% endif %}
+      {% endif %} {# if文ここまで #}
     {% endfor %}
     </div>
   </div>
