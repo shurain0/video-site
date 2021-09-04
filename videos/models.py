@@ -39,10 +39,5 @@ class Video(models.Model):
             return THUMBNAIL_URL.format(self.video_id)
         return ""
 
-    @property
-    def same_course_videos(self):
-        return self.course.videos.all()
-
-
     def __str__(self):
         return self.title
