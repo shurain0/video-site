@@ -21,7 +21,7 @@ class CourseListView(ListView):
 
     def get_queryset(self):
         # Viewで表示するクエリセットを取得
-        queryset = self.model.objects.prefetch_related('videos')
+        queryset = self.model.objects.prefetch_related('videos').exclude(videos__isnull=True)
         return queryset
 
 

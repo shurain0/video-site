@@ -6,7 +6,6 @@
 {% block content %}
 <div class="ui four doubling stackable cards">
 {% for object in object_list %}
-    {% if object.first_video %}
         <a class="link card" href="{% url 'detail' object.first_video.id %}">
             <div class="image">
                 {% if object.thumbnail %}
@@ -22,7 +21,6 @@
                 </div>
             </div>
         </a>
-    {% endif %}
 {% endfor %}
 </div>
 {% endblock content %} 
