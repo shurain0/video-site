@@ -6,19 +6,23 @@
 {% block content %}
 <div class="ui four doubling stackable cards">
 {% for object in object_list %}
-        <a class="link card" href="../{{object.first_video.id}}">
-        <div class="image">
-            {% if object.thumbnail %}
-                <img src="{{object.thumbnail.url}}">
-            {% endif %}
-        </div>
-        <div class="content">
-            <div class="header">{{object.title|truncatechars:32}}</div>
-            <div class="description">
-                {{object.description|truncatechars:32}}
+    {% if object.first_video %}
+        <a class="link card" href="{% url 'detail' object.first_video.id %}">
+            <div class="image">
+                {% if object.thumbnail %}
+                    <img src="{{object.thumbnail.url}}">
+                {% else %}
+                    <img src="default.jpg">
+                {% endif %}
             </div>
-        </div>
-    </a>
+            <div class="content">
+                <div class="header">{{object.title|truncatechars:32}}</div>
+                <div class="description">
+                    {{object.description|truncatechars:32}}
+                </div>
+            </div>
+        </a>
+    {% endif %}
 {% endfor %}
 </div>
 {% endblock content %} 
