@@ -17,22 +17,18 @@
     <h2 class="header">{{object.course.title}}</h2>
     <div class="ui devided items">
     {% for course_video in object.course.videos.all %}
-      {% if course_video.id is object.id %} {# 再生リストの動画が再生中の動画と一致する場合 #}
-        <div class="ui inverted grey segment item row" href="{% url 'detail' course_video.id %}">
-      {% else %} {#一致しない場合#}
+      {% if course_video.id == object.id %}
+        <a class="ui inverted grey segment item row">
+      {% else %}
         <a class="ui item row" href="{% url 'detail' course_video.id %}">
-      {% endif %} {# if文ここまで #}
+      {% endif %}
             <div class="ui small image column">
               <img src="{{course_video.thumbnail_url}}">
             </div>
             <div class="ui content column">
-              {{course_video.title| truncatechars:32}}
+            {{course_video.title}}
             </div>
-      {% if course_video.id is object.id %} {# 再生リストの動画が再生中の動画と一致する場合 #}
-        </div>
-      {% else %} {# 一致しない場合 #}
         </a>
-      {% endif %} {# if文ここまで #}
     {% endfor %}
     </div>
   </div>
