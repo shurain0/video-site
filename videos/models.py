@@ -1,5 +1,8 @@
 from django.db import models
+from django.utils import timezone
 import re
+
+from accounts.models import CustomUser
 
 
 class Course(models.Model):
@@ -41,3 +44,17 @@ class Video(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+
+    text = models.TextField(verbose_name="内容")
+    author = models.ForeignKey(
+        CustomUser, verbose_name="ユーザー", on_delete=models.CASCADE, related_name="comments")
+    video = models.ForeignKey(Video, verbose_name="動画",
+                              on_delete=models.CASCADE, related_name="comments")
+    created_at = models.DateTimeField(
+        verbose_name="投稿日時", default=timezone.now)
+
+    def __str__(self):
+        return self.text
