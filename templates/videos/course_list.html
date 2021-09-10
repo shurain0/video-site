@@ -6,7 +6,7 @@
 {% block content %}
 <div class="ui four doubling stackable cards">
 {% for object in object_list %}
-        <a class="link card" href="{% url 'detail' object.first_video.id %}">
+        <a class="link card" href="{% url 'course_detail' object.id %}">
             <div class="image">
                 {% if object.thumbnail %}
                     <img src="{{object.thumbnail.url}}">

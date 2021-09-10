@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{object.title}}{% endblock title %}
+
+{% block content %}
+<div class="ui vertical masthead center aligned segment">
+    <div class="ui text container">
+        <h1 class="ui header">{{object.title}}</h1>
+        <div>{{object.description}}</div>
+    </div>
+</div>
+<div class="ui hidden divider"></div>
+    <div class="ui stackable grid">
+        <div class="sixteen wide column">
+            <div class="ui header">コース内容</div>
+            <div class="ui container">
+                <div class="ui relaxed devided list">
+                    {% for course_video in object.videos.all %}
+                        <div class="item">
+                            <i class="play circle icon"></i>
+                            <div class="content">
+                                <a class="header" href="{% url 'detail' course_video.id %}">
+                                    {{course_video.title}}
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="ui header">レビュー</div>
+                <div class="value">
+                    {{object.reviews.count}}件の評価
+                </div>
+            <div class="ui statistic">
+            </div>
+                <div class="value">
+                    {{object.reviews.average}}
+                </div>
+            <div class="ui comments">
+                {% for review in object.reviews.all %}
+                    <div class="comment">
+                        <div class="content">
+                            <p class="author">{{ review.author }}</p>
+                            <div class="ui large star rating" data-rating="{{review.rating}}" data-max-rating="5"></div>
+                            <div class="header">{{review.title}}</div>
+                            <div class="metadata"><span class="date" style="display:block;">{{ review.created_at }}</span></div>
+                            <div class="text">{{review.text| linebreaksbr}}</div>
+                        </div>
+                    </div>
+                    <div class="ui hidden divider"></div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block extra_js %}
+<script>
+$('.ui.rating')
+  .rating('disable')
+;
+</script>
+{% endblock extra_js %}
