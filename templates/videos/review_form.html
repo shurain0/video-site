@@ -4,9 +4,21 @@
 {% block title %}{{object.course.title}}{% endblock title %}
 
 {% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">投稿</button>
-    </form>
+    <div class="ui text container">
+        <form class="ui form" method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="ui field">
+                    {{ field.label }}
+                <div class="ui input">
+                    {{ field }}
+                </div>
+                {% if field.errors %}
+                    <div class="ui pointing red basic label">{{ field.errors.0 }}</div>.
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button class="ui button" type="submit">投稿</button>
+        </form>
+    </div>
 {% endblock content %}
