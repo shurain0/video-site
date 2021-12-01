@@ -19,6 +19,14 @@ class Course(models.Model):
     def first_video(self):
         return self.videos.first()
 
+    @property
+    def count(self):
+        return self.reviews.count()
+
+    @property
+    def average(self):
+        return self.reviews.aggregate(avg=Avg('rating'))['avg']
+
     def __str__(self):
         return self.title
 
@@ -75,13 +83,13 @@ class Review(models.Model):
     created_at = models.DateTimeField(
         verbose_name="投稿日時", default=timezone.now)
 
-    @property
-    def count(self):
-        return self.all().count()
+    # @property
+    # def count(self):
+    #     return self.all().count()
 
-    @property
-    def average(self):
-        return self.all().aggregate(avg=Avg('rating'))['avg']
+    # @property
+    # def average(self):
+    #     return self.all().aggregate(avg=Avg('rating'))['avg']
 
     def __str__(self):
         return self.title
