@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Video, Course, Comment
+from .models import Video, Course, Comment, Review
 
 
 class VideoAdmin(admin.ModelAdmin):
@@ -33,3 +33,4 @@ class CommentAdmin(admin.ModelAdmin):
 admin.site.register(Video, VideoAdmin)
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(Review)

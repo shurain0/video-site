@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db.models import Avg
 import re
 
 from accounts.models import CustomUser
@@ -16,6 +18,14 @@ class Course(models.Model):
     @property
     def first_video(self):
         return self.videos.first()
+
+    @property
+    def count(self):
+        return self.reviews.count()
+
+    @property
+    def average(self):
+        return self.reviews.aggregate(avg=Avg('rating'))['avg']
 
     def __str__(self):
         return self.title
@@ -58,3 +68,28 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class Review(models.Model):
+
+    title = models.CharField(verbose_name="タイトル", max_length=255)
+    text = models.TextField(verbose_name="内容")
+    author = models.ForeignKey(
+        CustomUser, verbose_name="ユーザー", on_delete=models.CASCADE, related_name="reviews")
+    course = models.ForeignKey(Course, verbose_name="コース",
+                               on_delete=models.CASCADE, related_name="reviews")
+    rating = models.IntegerField(verbose_name="評価", validators=[
+                                 MinValueValidator(1), MaxValueValidator(5)])
+    created_at = models.DateTimeField(
+        verbose_name="投稿日時", default=timezone.now)
+
+    # @property
+    # def count(self):
+    #     return self.all().count()
+
+    # @property
+    # def average(self):
+    #     return self.all().aggregate(avg=Avg('rating'))['avg']
+
+    def __str__(self):
+        return self.title
