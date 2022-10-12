@@ -13,11 +13,8 @@ PROJECT_NAME = os.path.basename(BASE_DIR)
 # Security #
 ############
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'bv^m2%da764@d(43-c*xm$6#5^!_7&3ywvza9_=alsu&i^kdw!'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
