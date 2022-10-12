@@ -5,7 +5,7 @@ from pathlib import Path
 # Build paths #
 ###############
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 PROJECT_NAME = os.path.basename(BASE_DIR)
 
 
@@ -70,12 +70,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database #
 ############
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DATABASES = {}
 
 
 ##################

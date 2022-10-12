@@ -72,18 +72,3 @@ LOGGING = {
     },
 }
 
-
-##################
-# Email settings #
-##################
-
-EMAIL_CONFIG = env.email_url('EMAIL_URL')
-vars().update(EMAIL_CONFIG)
-
-
-###################
-# Stripe settings #
-###################
-
-STRIPE_API_KEY = env('STRIPE_API_KEY')
-STRIPE_PUBLISHABLE_KEY = env('STRIPE_PUBLISHABLE_KEY')
