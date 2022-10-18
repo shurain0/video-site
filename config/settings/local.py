@@ -107,6 +107,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 # Django Extensions #
 #####################
 
-INSTALLED_APPS += (
-    'django_extensions',
-)
+# INSTALLED_APPS += (
+#     'django_extensions',
+# )
