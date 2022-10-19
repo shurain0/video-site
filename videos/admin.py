@@ -27,10 +27,21 @@ class CourseAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('id', 'text', 'video', 'created_at')
+    list_select_related = ('video',)
+    list_display_links = ('id', 'text')
+    search_fields = ('title', 'description')
+    list_per_page: 50
+
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'author', 'course', 'created_at')
+    list_select_related = ('author', 'course',)
+    list_display_links = ('id', 'title')
+    search_fields = ('title', 'course')    
+    list_per_page: 50
 
 
 admin.site.register(Video, VideoAdmin)
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Comment, CommentAdmin)
-admin.site.register(Review)
+admin.site.register(Review, ReviewAdmin)

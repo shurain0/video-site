@@ -6,7 +6,18 @@
         </a>
         <div class="right menu">
         {% if course.id %}
-            <a href="{% url 'review_create' object.id %}" class="item">レビュー</a>
+        <a class="item">
+        {{course.reviews}}
+        </a>
+            {% if user in course.reviewer_list %}
+            {% else %}
+            <a href="{% url 'review_create' pk=course.id %}" class="item">レビュー</a>
+            {% endif %}
+        {% elif video.id %}
+            {% if user in object.course.reviewer_list %}
+            {% else %}
+            <a href="{% url 'review_create' video.course.id %}" class="item">レビュー</a>
+            {% endif %}
         {% endif %}
         {% if user.is_authenticated %}
              <a href="{% url 'logout' %}" class="item">ログアウト</a>

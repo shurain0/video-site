@@ -27,6 +27,15 @@ class Course(models.Model):
     def average(self):
         return self.reviews.aggregate(avg=Avg('rating'))['avg']
 
+    @property
+    def reviewer_list(self):
+        reviwer_list = []
+        reviews = self.reviews.select_related('author')
+        for review in reviews:
+            reviwer_list.append(review.author)
+        return reviwer_list
+
+
     def __str__(self):
         return self.title
 
@@ -82,6 +91,14 @@ class Review(models.Model):
                                  MinValueValidator(1), MaxValueValidator(5)])
     created_at = models.DateTimeField(
         verbose_name="投稿日時", default=timezone.now)
+
+    class Meta:
+        constraints =[
+            models.UniqueConstraint(
+                fields=['author', 'course'],
+                name = 'unique_reviewing'
+            ),
+        ]
 
     # @property
     # def count(self):
