@@ -6,9 +6,6 @@
         </a>
         <div class="right menu">
         {% if course.id %}
-        <a class="item">
-        {{course.reviews}}
-        </a>
             {% if user in course.reviewer_list %}
             {% else %}
             <a href="{% url 'review_create' pk=course.id %}" class="item">レビュー</a>
