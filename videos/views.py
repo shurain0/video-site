@@ -15,7 +15,7 @@ class VideoListView(ListView):
 video_list = VideoListView.as_view()
 
 
-class VideoDetailView(FormMixin, DetailView):
+class VideoDetailView(LoginRequiredMixin, FormMixin, DetailView):
     model = Video
     form_class = forms.CommentForm
 
